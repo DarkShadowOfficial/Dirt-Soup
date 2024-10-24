@@ -1,18 +1,20 @@
-function displayCS(cS, w, h) {
+function displayCS(cS, xmin, ymin, xmax, ymax, step = 1) {
   let plane = "";
   For(
-    (x) => {
+    (y) => {
       For(
-        (y) => {
+        (x) => {
           plane += cs.getCoordinateData(cS, tuple(x, y)) + "  ";
         },
-        0,
-        w
+        xmin,
+        xmax+step,
+        step
       );
       plane += "\n";
     },
-    0,
-    h
+    ymin,
+    ymax+step,
+    step
   );
   return plane;
 }
