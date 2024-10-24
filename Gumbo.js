@@ -2,7 +2,7 @@ const init = (varName, value) => {
   globalThis[varName] = value;
 };
 const print = console.log;
-function For(action, start = 0, end, step = 1) {
+function For(action, start, end, step = 1) {
   for (let i = start; i < end; i += step) {
     action(i);
   }
@@ -44,7 +44,7 @@ const type = (item) => {
 };
 const set = (a) => {
   let arr = [];
-  let s = new Set(a).forEach(x => arr.push(x));
+  let s = new Set(a).forEach((x) => arr.push(x));
   return arr;
 };
 const str = (a) => JSON.stringify(a);
@@ -272,7 +272,7 @@ class MODULES {
         return {
           initialize: i,
           getCoordinateData: gcd,
-          setCoordinateData: scd
+          setCoordinateData: scd,
         };
       }
     }
@@ -321,7 +321,10 @@ class MODULES {
     class Time {
       constructor() {
         function sleep(seconds) {
-          setTimeout(void 0, seconds * 1000);
+          var dt = new Date();
+          while (new Date() - dt <= seconds*1000) {
+            /* Do nothing */
+          }
         }
         return {
           sleep: sleep,
