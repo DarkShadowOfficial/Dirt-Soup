@@ -51,7 +51,7 @@ const str = (a) => JSON.stringify(a);
 const int = (a) => {
   switch (type(a)) {
     case "number":
-      return floor(a);
+      return Math.floor(a);
     case "string":
       return parseInt(a);
     default:
@@ -101,6 +101,50 @@ const Import = (module, as = module.toLowerCase(), ...imports) => {
 };
 class MODULES {
   constructor() {
+    class C {
+      constructor() {
+        const RED = {r: 1, g: 0, b: 0};
+        const GREEN = {r: 0, g: 1, b: 0};
+        const CYAN = {r: 0, g: 1, b: 1};
+        const MAGENTA = {r: 1, g: 0, b: 1};
+        const YELLOW = {r: 1, g: 1, b: 0};
+        const BLUE = {r: 0, g: 0, b: 1};
+        class Color {
+          constructor(r, g, b) {
+            function rgb() {
+              return `rgb(${r*255}, ${g*255}, ${b*255})`;
+            }
+            function hex() {
+              let key = {10: "a", 11: "b", 12: "c", 13: "d", 14: "e", 15: "f"};
+              iter(i => {
+                key[i] = str(i);
+              }, range(0, 10))
+              let r1 = key[Math.floor(r*255/16)];
+              let r2 = key[int(r*255) % 16];
+              let b1 = key[Math.floor(b*255/16)];
+              let b2 = key[int(b*255)%16];
+              let g1 = key[Math.floor(g*255/16)];
+              let g2 = key[int(g*255)%16];
+              return `#${r1}${r2}${g1}${g2}${b1}${b2}`;
+            }
+            function comp() {
+              let sum = r+g+b;
+              return {r: float((r/sum * 100).toFixed(2)), g: float((g/sum * 100).toFixed(2)), b: float((b/sum * 100).toFixed(2))};
+            }
+            return {r: r, g: g, b: b, toRGB: rgb, toHex: hex, getComposition: comp};
+          }
+        }
+        return {
+          RED: RED,
+          GREEN: GREEN,
+          CYAN: CYAN,
+          MAGENTA: MAGENTA,
+          YELLOW: YELLOW,
+          BLUE: BLUE,
+          Color: Color
+        };
+      }
+    }
     class M {
       constructor() {
         let obj = {};
@@ -425,6 +469,7 @@ class MODULES {
       Time: Time,
       Turtle: Turtle,
       Keyboard: Keyboard,
+      Color: C
     };
   }
 }
