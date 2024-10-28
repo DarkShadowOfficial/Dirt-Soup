@@ -12,7 +12,7 @@ Defining variables will be in JavaScript syntax, using either `let` or `const`.
 
 ### Control Flow
 #### Repetition
-For `for` loops, you can use 1 of 3 functions: repeat(), For(), and iter()
+For `for` loops, you can use 1 of 3 functions: repeat(), For(), and iter().
 To simply repeat a function `n` amount of times, use `repeat()`:
 ```
 repeat(() => print("Hello World!"), 100) // prints "Hello World!" 100 times
