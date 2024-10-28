@@ -46,6 +46,8 @@ const int = (a) => {
       return Math.floor(a);
     case "string":
       return parseInt(a);
+    case "char":
+      return parseInt(a);
     default:
       throw "Cannot parse as int.";
   }
@@ -56,6 +58,8 @@ const float = (a) => {
       return a;
     case "string":
       return parseFloat(a);
+    case "char":
+      return parseFloat;
     default:
       throw "Cannot parse as float.";
   }
