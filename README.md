@@ -93,7 +93,7 @@ Import("Time", "t") // globalizes the Time module as "t"
 Import("Time", null, "now", "timestamp", "elapsedTime") // Globalizes the functions 'now()', 'timestamp()', and 'elapsedTime()'
 Import("Time", null, "*") // Globalizes every method in the Time module
 ```
-###### Available modules as of 10/28
+###### Available modules as of 10/28/2024
 - Math
 - Time
 - Color
