@@ -1,6 +1,3 @@
-const init = (varName, value) => {
-  globalThis[varName] = value;
-};
 const print = console.log;
 function For(action, start, end, step = 1) {
   for (let i = start; i < end; i += step) {
@@ -84,10 +81,10 @@ const Import = (module, as = module.toLowerCase(), ...imports) => {
     throw err instanceof TypeError
       ? "Module Import Error: Module '" + module + "' not found."
       : "Methods/Properties " +
-            imports +
-            " were not found in module '" +
-            module +
-            "'.";
+          imports +
+          " were not found in module '" +
+          module +
+          "'.";
   }
 };
 class MODULES {
@@ -303,9 +300,11 @@ class MODULES {
           if (type(coords) == "tuple") {
             return coordinates[coords];
           } else {
-            throw "Coordinate Error: Target coordinates must be of type 'tuple'. Entered coordinates were of type '" +
-                type(coords) +
-                "'.";
+            throw (
+              "Coordinate Error: Target coordinates must be of type 'tuple'. Entered coordinates were of type '" +
+              type(coords) +
+              "'."
+            );
           }
         }
         function scd(coordinateSystem, coords, data) {
@@ -313,9 +312,11 @@ class MODULES {
           if (type(coords) == "tuple") {
             coordinates[coords] = data;
           } else {
-            throw "Coordinate Error: Target coordinates must be of type 'tuple'. Entered coordinates were of type '" +
-                type(coords) +
-                "'.";
+            throw (
+              "Coordinate Error: Target coordinates must be of type 'tuple'. Entered coordinates were of type '" +
+              type(coords) +
+              "'."
+            );
           }
         }
         return {
@@ -325,54 +326,54 @@ class MODULES {
         };
       }
     }
-    class fs {
-      constructor() {
-        let textFile = null;
-        const makeTextFile = function (text) {
-          let data = new Blob([text], { type: "text/plain" });
-          if (textFile !== null) {
-            window.URL.revokeObjectURL(textFile);
-          }
-          textFile = window.URL.createObjectURL(data);
-          return textFile;
-        };
-        let f;
-        let d;
-        function append(data) {
-          d += data;
-          f = makeTextFile(d);
-        }
-        function write(data) {
-          f = makeTextFile(data);
-          d = data;
-        }
-        function read() {
-          return d;
-        }
-        let w;
-        function open() {
-          w = window.open(f);
-        }
-        function close() {
-          w.close();
-          f = null;
-          d = null;
-        }
-        return {
-          open: open,
-          read: read,
-          append: append,
-          write: write,
-          close: close,
-        };
-      }
-    }
+    // fs Module is still under development
+    // class fs {
+    //   constructor() {
+    //     let textFile = null;
+    //     const makeTextFile = function (text) {
+    //       let data = new Blob([text], { type: "text/plain" });
+    //       if (textFile !== null) {
+    //         window.URL.revokeObjectURL(textFile);
+    //       }
+    //       textFile = window.URL.createObjectURL(data);
+    //       return textFile;
+    //     };
+    //     let f;
+    //     let d;
+    //     function append(data) {
+    //       d += data;
+    //       f = makeTextFile(d);
+    //     }
+    //     function write(data) {
+    //       f = makeTextFile(data);
+    //       d = data;
+    //     }
+    //     function read() {
+    //       return d;
+    //     }
+    //     let w;
+    //     function open() {
+    //       w = window.open(f);
+    //     }
+    //     function close() {
+    //       w.close();
+    //       f = null;
+    //       d = null;
+    //     }
+    //     return {
+    //       open: open,
+    //       read: read,
+    //       append: append,
+    //       write: write,
+    //       close: close,
+    //     };
+    //   }
+    // }
     class Time {
       constructor() {
         function sleep(seconds) {
           var dt = new Date();
-          while (new Date() - dt <= seconds * 1000) {
-          }
+          while (new Date() - dt <= seconds * 1000) {}
         }
         let tstamp;
         function timestamp() {
@@ -383,16 +384,52 @@ class MODULES {
           tstamp = null;
         }
         function elapsed() {
-          if (tstamp == null) throw "Timestamp Error: Cannot use inactive timestamp.";
+          if (tstamp == null)
+            throw "Timestamp Error: Cannot use inactive timestamp.";
           return Date.now() - tstamp;
         }
         function now() {
-          let monthsA = ['Jan', 'Feb', "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-          let months = ['January', 'February', "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-          let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+          let monthsA = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ];
+          let months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ];
+          let days = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+          ];
           let n = new Date().toString();
           return {
-            hrs: new Date().getHours() % 12 == 0 ? 12 : new Date().getHours() % 12,
+            hrs:
+              new Date().getHours() % 12 == 0 ? 12 : new Date().getHours() % 12,
             hrsMT: new Date().getHours(),
             min: new Date().getMinutes(),
             sec: new Date().getSeconds(),
@@ -403,59 +440,15 @@ class MODULES {
             month: months[new Date().getMonth()],
             date: new Date().getDate(),
             day: days[new Date().getDay()],
-            timezone: n.split('(')[1].replace(')', '')
-          }
+            timezone: n.split("(")[1].replace(")", ""),
+          };
         }
         return {
           sleep: sleep,
           now: now,
           timestamp: timestamp,
           deleteTimestamp: deleteTimestamp,
-          elapsedTime: elapsed
-        };
-      }
-    }
-    class Turtle {
-      constructor() {
-        let html =
-          "<canvas></canvas><script>let canvas = document.querySelector('canvas'); let ctx = canvas.getContext('2d');";
-        let win = window.open("about:blank");
-        let width;
-        let height;
-        function screen(w = 500, h = 300, color) {
-          width = w;
-          height = h;
-          html += `canvas.width = ${w};
-          canvas.height = ${h};
-          ctx.fillStyle = "${color}";
-          ctx.fillRect(0, 0, ${w}, ${h});`;
-        }
-        function clear() {
-          html += `ctx.clearRect(0, 0, ${width}, ${height})`;
-        }
-        function circle(x, y, rad, color) {
-          html += `ctx.beginPath(); ctx.fillStyle = '${color}'; ctx.arc(${x}, ${y}, ${rad}, 0, Math.PI*2); ctx.fill();`;
-        }
-        function rect(x, y, w, h, color) {
-          html += `ctx.fillStyle = '${color}'; ctx.fillRect(${x - w / 2}, ${
-            y - h / 2
-          }, ${w}, ${h});`;
-        }
-        function square(x, y, size, color) {
-          html += `ctx.fillStyle = '${color}'; ctx.fillRect(${x - size / 2}, ${
-            y - size / 2
-          }, ${size}, ${size});`;
-        }
-        function load() {
-          win.document.write(html + "</script>");
-        }
-        return {
-          screen: screen,
-          load: load,
-          circle: circle,
-          clear: clear,
-          rect: rect,
-          square: square,
+          elapsedTime: elapsed,
         };
       }
     }
@@ -501,13 +494,10 @@ class MODULES {
     }
     return {
       Math: M,
-      HtmlGUI: HtmlGUI,
       Random: Random,
       Stats: Stats,
       CoordinateSystem: CoordinateSystem,
-      FS: fs,
       Time: Time,
-      Turtle: Turtle,
       Keyboard: Keyboard,
       Color: C,
     };
