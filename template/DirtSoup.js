@@ -589,4 +589,5 @@ function linkScript(src) {
 }
 !function() {
   linkScript('init');
+  window.onload = () => linkScript('main');
 }();
