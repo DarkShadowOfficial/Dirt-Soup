@@ -101,3 +101,8 @@ Import("Time", null, "*") // Globalizes every method in the Time module
 - Random
 - Stats
 - Keyboard
+###### Update - 10/30 - `shuffleArray()`
+You can now use `shuffleArray()` to shuffle an array, as the name suggests:
+```
+shuffleArray([1, 2, 3, 4, 5]) // returns a shuffled array, such as [2, 3, 1, 5, 4]
+```
