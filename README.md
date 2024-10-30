@@ -10,6 +10,7 @@ Example code (demo.ds is a defined Dirt Soup file you have written) in `main.ds`
 ```
 linkScript('demo'); // You must omit the .ds, since the function adds it on later.
 ```
+It is **HIGHLY** recommended that you only define functions in files that aren't `main.ds`, rather than running code.
 
 ### Basic functionalities
 Just like in Python, the `print()` function can be used to log to the console.
