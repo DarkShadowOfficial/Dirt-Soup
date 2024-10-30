@@ -67,6 +67,7 @@ const float = (a) => {
 String.prototype.lower = String.prototype.toLowerCase;
 String.prototype.upper = String.prototype.toUpperCase;
 const Import = (module, as = module.toLowerCase(), ...imports) => {
+  const init = (item, value) => globalThis[item] = value;
   try {
     if (imports.length == 0) {
       init(as, eval(`new (new MODULES().${module})()`));
@@ -557,3 +558,16 @@ class Char extends String {
 }
 const char = (a) => new Char(a);
 const len = (data) => data.length;
+function shuffleArray(array) {
+  const randint = (min, max) => Math.round(Math.random()*(max-min) + min);
+  let arr = [...array];
+  let A = [];
+  iter(i => {
+      let item = randint(0, len(arr) - 1);
+      let swap = arr[item];
+      arr[item] = arr[len(arr)-1];
+      arr[len(arr)-1] = swap;
+      A.push(arr.pop());
+  }, range(0, len(array)))
+  return A;
+}
