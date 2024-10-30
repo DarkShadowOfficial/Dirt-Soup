@@ -14,7 +14,10 @@ function iter(action, object) {
     }
   } else if (type(object) == "array") {
     object.forEach((x) => action(x));
+  } else if (type(object) == "string") {
+    object.split('').forEach(x => action(x));
   }
+  if (NOT(iterable(object))) throw "Cannot iterate through non-iterable";
 }
 const XOR = (a, b) => (a || b) && !(a && b);
 const OR = (a, b) => a || b;
@@ -571,3 +574,16 @@ function shuffleArray(array) {
   }, range(0, len(array)))
   return A;
 }
+function iterable(data) {
+  try {
+    reversed(data);
+    return true;
+  } catch(err) {
+    return false;
+  }
+}
+!function() {
+  let script = document.createElement('script');
+  script.src = 'main.ds';
+  document.body.appendChild(script);
+}()
