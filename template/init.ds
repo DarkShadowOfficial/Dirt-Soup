@@ -1,0 +1,4 @@
+/*
+Link other Dirt Soup scripts here
+*/
+linkScript('main');
