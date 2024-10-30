@@ -588,5 +588,5 @@ function linkScript(src) {
   document.body.appendChild(script);
 }
 !function() {
-  linkScript('main');
+  linkScript('init');
 }();
