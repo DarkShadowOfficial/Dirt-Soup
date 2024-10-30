@@ -101,8 +101,14 @@ Import("Time", null, "*") // Globalizes every method in the Time module
 - Random
 - Stats
 - Keyboard
-###### Update - 10/30 - `shuffleArray()`
+###### Update - 10/30
 You can now use `shuffleArray()` to shuffle an array, as the name suggests:
 ```
 shuffleArray([1, 2, 3, 4, 5]) // returns a shuffled array, such as [2, 3, 1, 5, 4]
+```
+The `iter()` function now supports string inputs, by iterating through each individual character of the string.
+The new `iterable()` function returns whether the inputted data is iterable, as a boolean.
+```
+iterable([1, 2, 3]) // true
+iterable(145) // false
 ```
