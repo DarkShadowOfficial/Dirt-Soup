@@ -582,8 +582,11 @@ function iterable(data) {
     return false;
   }
 }
-!function() {
+function linkScript(src) {
   let script = document.createElement('script');
-  script.src = 'main.ds';
+  script.src = src + '.ds';
   document.body.appendChild(script);
-}()
+}
+!function() {
+  linkScript('main');
+}();
