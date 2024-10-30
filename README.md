@@ -5,8 +5,7 @@ Dirt Soup is a Python-like programming language with JavaScript syntax, which co
 ### Implementation
 Implement Dirt Soup by linking DirtSoup.js in the `<body>` of your document.
 Your main file must be named `main.ds`, and your initializer file must be named `init.ds`.
-Your `init.ds` file must always end with `linkScript('main')`, which links the main.ds file.
-All other Dirt Soup files you're linking must be linked in `init.ds` through `linkScript(name of file, without the .ds extension, which is automatically added when linking)`. After linking all other Dirt Soup scripts, you link main.ds.
+All other Dirt Soup files you're linking must be linked in `init.ds` through `linkScript(name of file, without the .ds extension, which is automatically added when linking)`. `main.ds` is automatically linked, so you don't link it in `init.js`.
 
 ### Basic functionalities
 Just like in Python, the `print()` function can be used to log to the console.
