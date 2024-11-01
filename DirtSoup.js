@@ -586,8 +586,19 @@ function linkScript(src) {
   let script = document.createElement('script');
   script.src = src + '.ds';
   document.body.appendChild(script);
+  return script;
 }
 !function() {
   linkScript('init');
-  window.onload = () => linkScript('main');
+  window.onload = () => {
+    linkScript('main').onload = () => {
+      try {
+      $();
+    } catch(err) {
+      if (NOT(err instanceof ReferenceError)) {
+        throw err;
+      }
+    }
+    };
+  };
 }();
