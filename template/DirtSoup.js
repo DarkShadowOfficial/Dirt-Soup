@@ -185,54 +185,66 @@ class MODULES {
     }
     class HtmlGUI {
       constructor() {
-        let html = document.createElement("div");
-        function title() {
-          let p = document.createElement("title");
-          p.content = (content) => {
-            p.innerHTML = content;
-          };
-          p.load = () => html.appendChild(p);
-          return p;
+        const html = document.body;
+        HTMLElement.prototype.load = function() {
+          html.appendChild(this);
         }
-        function text() {
-          let p = document.createElement("p");
-          p.content = (content) => (p.innerHTML = content);
-          p.load = () => html.appendChild(p);
-          return p;
+        HTMLElement.prototype.text = function(text) {
+          this.innerText = text;
         }
-        function header(importance = 1) {
-          let h = document.createElement("h" + importance);
-          h.content = (content) => (h.innerHTML = content);
-          h.load = () => html.appendChild(h);
-          return h;
+        HTMLInputElement.prototype.get = function() {
+          return this.value;
         }
-        function input() {
-          let p = document.createElement("input");
-          p.mode = (mode) => (p.type = mode);
-          p.get = () => p.value;
-          p.load = () => html.appendChild(p);
-          return p;
+        HTMLCanvasElement.prototype.bg = function(color) {
+          this.ctx().fillStyle = color;
+          this.ctx().fillRect(0, 0, this.width, this.height);
         }
-        function button(func) {
-          let p = document.createElement("button");
-          p.onclick = func;
-          p.content = (content) => (p.innerHTML = content);
-          // p.function = (func) => (p.onclick = func);
-          p.load = () => html.appendChild(p);
-          return p;
+        HTMLCanvasElement.prototype.dimensions = function(width, height) {
+          this.width = width;
+          this.height = height;
         }
-        function run() {
-          let w = window.open("about:blank");
-          w.document.write(html.innerHTML);
-        }
-        return {
-          text: text,
-          header: header,
-          title: title,
-          input: input,
-          button: button,
-          run: run,
+        HTMLCanvasElement.prototype.ctx = function() {
+          return this.getContext('2d');
         };
+        HTMLCanvasElement.prototype.rect = function(x, y, width, height, color) {
+          this.ctx().fillStyle = color;
+          this.ctx().fillRect(x - width/2, y - height/2, width, height);
+        }
+        HTMLCanvasElement.prototype.circle = function(x, y, r, color) {
+          this.ctx().fillStyle = color;
+          this.ctx().beginPath();
+          this.ctx().arc(x, y, r, 0, Math.PI*2);
+          this.ctx().fill();
+        }
+        HTMLCanvasElement.prototype.line = function(x0, y0, x1, y1, color) {
+          this.ctx().strokeStyle = color;
+          this.ctx().beginPath();
+          this.ctx().moveTo(x0, y0);
+          this.ctx().lineTo(x1, y1);
+          this.ctx().stroke();
+        }
+        HTMLCanvasElement.prototype.clear = function() {
+          this.ctx().fillStyle = "white";
+          this.ctx().fillRect(0, 0, this.width, this.height);
+        }
+        HTMLStyleElement.prototype.writeStyle = function(identifier, styles) {
+          let s = ``;
+          iter(i => {
+            s += `${i.style}: ${i.value};\n`;
+          }, styles)
+          this.innerHTML += `${identifier} {
+            ${s}
+          }\n`;
+        }
+        HTMLScriptElement.prototype.link = function(src) {
+          this.src = src;
+        }
+        const element = el => document.createElement(el);
+        const get = input => input.value;
+        return {
+          new: element,
+          get: get
+        }
       }
     }
     class Stats {
@@ -508,6 +520,7 @@ class MODULES {
       Time: Time,
       Keyboard: Keyboard,
       Color: C,
+      HtmlGUI: HtmlGUI
     };
   }
 }
