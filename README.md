@@ -120,3 +120,5 @@ function $() {
   print("Hello World");
 } // this is automatically called, and "Hello World" is printed to the console
 ```
+
+The `HtmlGUI` library is now available in the built-in modules (accessible with `Import()`), with features such as text, canvas graphics, easy stylesheet writing, and more.
