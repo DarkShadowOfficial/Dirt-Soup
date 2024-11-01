@@ -113,3 +113,10 @@ The new `iterable()` function returns whether the inputted data is iterable, as 
 iterable([1, 2, 3]) // true
 iterable(145) // false
 ```
+###### Update - 11/1
+Under the case where a function needs to be spontaneous, just name your function `$`, and it will be automatically called, without you needing to call it. Reserve `$()` for this use only.
+```
+function $() {
+  print("Hello World");
+} // this is automatically called, and "Hello World" is printed to the console
+```
