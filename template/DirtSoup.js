@@ -593,12 +593,18 @@ function linkScript(src) {
   window.onload = () => {
     linkScript('main').onload = () => {
       try {
-      $();
-    } catch(err) {
-      if (NOT(err instanceof ReferenceError)) {
-        throw err;
+       $();
+      } catch(err) {
+        if (err instanceof ReferenceError) {
+          if (err.message.includes("$ is not defined")) {
+            void(0);
+          } else {
+            throw err;
+          }
+        } else {
+          throw err;
+        }
       }
-    }
     };
   };
 }();
