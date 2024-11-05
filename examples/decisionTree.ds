@@ -1,0 +1,53 @@
+Import("Random", null, "rand")
+class Tree {
+    constructor(n = 2) {
+        this.layers = n;
+    }
+    map(x = rand()) {
+        let split = 0.5;
+        let lower = 0;
+        let upper = 1;
+        let path = [];
+        iter(i => {
+            if (x >= split) {
+                path.push(1);
+                lower = split;
+                split += (upper-split)/2;
+            } else {
+                path.push(0);
+                upper = split;
+                split -= (split-lower)/2;
+            }
+        }, range(0, this.layers))
+        return path;
+    }
+    setLayers(n) {
+        this.layers = n;
+    }
+    optimize(x) {
+        let split = 0.5;
+        let lower = 0;
+        let upper = 1;
+        let fLower = null;
+        let fUpper = null;
+        let path = [];
+        let l = 0;
+        while (NOR(fUpper == upper, fLower == lower)) {
+            if (x >= split) {
+                path.push(1);
+                let s = lower;
+                lower = split;
+                fLower = s;
+                split += (upper-split)/2;
+            } else {
+                path.push(0);
+                let s = upper;
+                upper = split;
+                fUpper = s;
+                split -= (split-lower)/2;
+            }
+            l++;
+        }
+        return l;
+    }
+}
